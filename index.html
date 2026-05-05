@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陕西铁路工程职业技术学院 — 铁路英才的摇篮</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 纹理叠加 -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- 预加载 -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-track">
+            <div class="preloader-fill"></div>
+        </div>
+        <div class="preloader-label">
+            <span class="preloader-zh">陕铁院</span>
+            <span class="preloader-en">SHAANXI RAILWAY INSTITUTE</span>
+        </div>
+    </div>
+
+    <!-- 自定义光标 -->
+    <div class="cur" id="cur" aria-hidden="true"></div>
+    <div class="cur-ring" id="curRing" aria-hidden="true"></div>
+
+    <!-- 导航 -->
+    <header class="hdr" id="hdr">
+        <div class="hdr-in">
+            <a href="#sec-hero" class="hdr-logo" data-cursor="pointer">
+                <span class="hl-zh">陕铁院</span>
+                <span class="hl-dot"></span>
+                <span class="hl-en">SXRI</span>
+            </a>
+            <nav class="hdr-nav" id="hdrNav">
+                <a href="#sec-hero" class="hn-link active" data-cursor="pointer">首页</a>
+                <a href="#sec-about" class="hn-link" data-cursor="pointer">概况</a>
+                <a href="#sec-feat" class="hn-link" data-cursor="pointer">特色</a>
+                <a href="#sec-dept" class="hn-link" data-cursor="pointer">院系</a>
+                <a href="#sec-life" class="hn-link" data-cursor="pointer">校园</a>
+                <a href="#sec-job" class="hn-link" data-cursor="pointer">就业</a>
+                <a href="#sec-conn" class="hn-link" data-cursor="pointer">联系</a>
+            </nav>
+            <button class="hdr-burger" id="burger" data-cursor="pointer" aria-label="菜单" aria-expanded="false">
+                <span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 全屏菜单 -->
+    <div class="fsmenu" id="fsmenu">
+        <div class="fsmenu-bg"></div>
+        <nav class="fsmenu-nav">
+            <a href="#sec-hero" data-cursor="pointer"><i>01</i><span>首页</span></a>
+            <a href="#sec-about" data-cursor="pointer"><i>02</i><span>学校概况</span></a>
+            <a href="#sec-feat" data-cursor="pointer"><i>03</i><span>办学特色</span></a>
+            <a href="#sec-dept" data-cursor="pointer"><i>04</i><span>院系专业</span></a>
+            <a href="#sec-life" data-cursor="pointer"><i>05</i><span>校园生活</span></a>
+            <a href="#sec-job" data-cursor="pointer"><i>06</i><span>就业前景</span></a>
+            <a href="#sec-conn" data-cursor="pointer"><i>07</i><span>联系我们</span></a>
+        </nav>
+        <div class="fsmenu-foot">
+            <p>陕西省渭南市站北街东段1号</p>
+            <a href="https://www.sxri.net" target="_blank" rel="noopener noreferrer">www.sxri.net</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- ========== 首页大图 ========== -->
+        <section class="hero" id="sec-hero">
+            <div class="hero-media">
+                <img class="hero-img" src="images/hero-campus.jpg" alt="高新校区全景" width="1920" height="1080" fetchpriority="high">
+                <div class="hero-grad"></div>
+            </div>
+            <div class="hero-body">
+                <p class="hero-eyebrow reveal-up">
+                    <span class="he-line"></span>
+                    <span>EST. 1973 · 国家"双高计划"建设单位</span>
+                    <span class="he-line"></span>
+                </p>
+                <h1 class="hero-title">
+                    <span class="ht-line reveal-up" style="--d:.1s">陕西铁路工程</span>
+                    <span class="ht-line ht-accent reveal-up" style="--d:.2s">职业技术学院</span>
+                </h1>
+                <p class="hero-sub reveal-up" style="--d:.35s">铁路建设者的黄埔军校</p>
+                <div class="hero-cta reveal-up" style="--d:.5s">
+                    <a href="#sec-about" class="btn-gold magnetic" data-cursor="pointer">
+                        <span>探索更多</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="hs-item reveal-up" style="--d:.55s">
+                    <span class="hs-num" data-to="50">0</span><span class="hs-suf">+</span>
+                    <span class="hs-lab">年办学历史</span>
+                </div>
+                <div class="hs-div"></div>
+                <div class="hs-item reveal-up" style="--d:.65s">
+                    <span class="hs-num" data-to="16000">0</span><span class="hs-suf">+</span>
+                    <span class="hs-lab">在校学生</span>
+                </div>
+                <div class="hs-div"></div>
+                <div class="hs-item reveal-up" style="--d:.75s">
+                    <span class="hs-num" data-to="96">0</span><span class="hs-suf">%</span>
+                    <span class="hs-lab">就业率</span>
+                </div>
+                <div class="hs-div"></div>
+                <div class="hs-item reveal-up" style="--d:.85s">
+                    <span class="hs-num" data-to="900">0</span><span class="hs-suf">亩</span>
+                    <span class="hs-lab">校园面积</span>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <div class="hsc-line"></div>
+                <span>SCROLL</span>
+            </div>
+        </section>
+
+        <!-- ========== 学校概况 ========== -->
+        <section class="sec sec-about" id="sec-about">
+            <div class="wrap">
+                <div class="sec-hdr">
+                    <span class="sh-num reveal-up">01</span>
+                    <h2 class="sh-ttl reveal-up">学校概况</h2>
+                    <div class="sh-bar reveal-up"></div>
+                </div>
+                <div class="about-grid">
+                    <div class="about-img reveal-scale">
+                        <img src="images/campus-love.jpg" alt="我爱陕铁院" loading="lazy">
+                        <span class="about-cap">"我爱陕铁院"景观</span>
+                    </div>
+                    <div class="about-txt">
+                        <p class="about-lead reveal-up">陕西铁路工程职业技术学院位于陕西省渭南市，是<b>国家"双高计划"高水平专业群建设单位</b>、<b>国家示范性高等职业院校</b>。</p>
+                        <p class="about-desc reveal-up">学校始建于1973年，原名渭南铁路工程学校，2003年升格为高职院校。以铁路工程类专业为特色，形成了以铁道工程、城市轨道交通、测绘工程、道路桥梁等为核心的特色专业群，被誉为<strong>"铁路建设者的黄埔军校"</strong>。</p>
+                        <div class="about-cards">
+                            <div class="ac reveal-up" style="--d:.1s">
+                                <svg class="ac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <div><strong>地理位置</strong><span>陕西省渭南市，毗邻古都西安</span></div>
+                            </div>
+                            <div class="ac reveal-up" style="--d:.2s">
+                                <svg class="ac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                <div><strong>办学规模</strong><span>占地900余亩，40余个专业</span></div>
+                            </div>
+                            <div class="ac reveal-up" style="--d:.3s">
+                                <svg class="ac-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                                <div><strong>荣誉资质</strong><span>国家双高计划 / 全国就业50强</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 办学特色 ========== -->
+        <section class="sec sec-feat" id="sec-feat">
+            <div class="wrap">
+                <div class="sec-hdr">
+                    <span class="sh-num reveal-up">02</span>
+                    <h2 class="sh-ttl reveal-up">办学特色</h2>
+                    <div class="sh-bar reveal-up"></div>
+                </div>
+                <div class="feat-grid">
+                    <div class="fc reveal-up" style="--d:0s">
+                        <span class="fc-idx">01</span>
+                        <div class="fc-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="16"/><path d="M6 20h28M20 6v28"/></svg></div>
+                        <h3>铁路特色鲜明</h3>
+                        <p>聚焦铁路基础设施建设与维护，覆盖高铁、地铁、城轨多领域</p>
+                    </div>
+                    <div class="fc reveal-up" style="--d:.08s">
+                        <span class="fc-idx">02</span>
+                        <div class="fc-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="16"/><path d="M14 20c0-3.3 2.7-6 6-6m6 6c0 3.3-2.7 6-6 6"/><circle cx="20" cy="20" r="3"/></svg></div>
+                        <h3>校企深度融合</h3>
+                        <p>与中国中铁、中国铁建等央企深度合作，"订单式"培养</p>
+                    </div>
+                    <div class="fc reveal-up" style="--d:.16s">
+                        <span class="fc-idx">03</span>
+                        <div class="fc-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="6" y="6" width="28" height="28" rx="3"/><path d="M6 16h28M16 16v18"/></svg></div>
+                        <h3>实训条件一流</h3>
+                        <p>全国领先铁路综合实训基地，设备总值超2亿元</p>
+                    </div>
+                    <div class="fc reveal-up" style="--d:.24s">
+                        <span class="fc-idx">04</span>
+                        <div class="fc-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="13" r="7"/><path d="M7 36c0-7.2 5.8-13 13-13s13 5.8 13 13"/></svg></div>
+                        <h3>师资力量雄厚</h3>
+                        <p>专任教师700余人，教授副教授占比超40%</p>
+                    </div>
+                    <div class="fc reveal-up" style="--d:.32s">
+                        <span class="fc-idx">05</span>
+                        <div class="fc-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="16"/><path d="M20 4c-6 6-6 26 0 32M20 4c6 6 6 26 0 32M4 20h32"/></svg></div>
+                        <h3>国际合作广泛</h3>
+                        <p>参与"一带一路"铁路建设人才培养</p>
+                    </div>
+                    <div class="fc reveal-up" style="--d:.4s">
+                        <span class="fc-idx">06</span>
+                        <div class="fc-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 6l4.5 9.1 10 1.5-7.2 7 1.7 10L20 29l-9 4.6 1.7-10-7.2-7 10-1.5z"/></svg></div>
+                        <h3>技能竞赛突出</h3>
+                        <p>全国技能大赛屡获佳绩，多赛项位居全国前列</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 院系专业 ========== -->
+        <section class="sec sec-dept" id="sec-dept">
+            <div class="wrap">
+                <div class="sec-hdr">
+                    <span class="sh-num reveal-up">03</span>
+                    <h2 class="sh-ttl reveal-up">院系专业</h2>
+                    <div class="sh-bar reveal-up"></div>
+                </div>
+                <div class="dept-wrap reveal-up">
+                    <div class="dept-tabs">
+                        <button class="dt active" data-tab="d1" data-cursor="pointer"><i>01</i>铁道工程学院</button>
+                        <button class="dt" data-tab="d2" data-cursor="pointer"><i>02</i>城轨工程学院</button>
+                        <button class="dt" data-tab="d3" data-cursor="pointer"><i>03</i>测绘工程学院</button>
+                        <button class="dt" data-tab="d4" data-cursor="pointer"><i>04</i>道桥与建筑学院</button>
+                        <button class="dt" data-tab="d5" data-cursor="pointer"><i>05</i>工程管理与物流学院</button>
+                        <button class="dt" data-tab="d6" data-cursor="pointer"><i>06</i>机电工程学院</button>
+                    </div>
+                    <div class="dept-panels">
+                        <div class="dp active" id="d1">
+                            <div class="dp-img"><img src="images/training-tunnel.jpg" alt="隧道实训基地" loading="lazy"></div>
+                            <div class="dp-body">
+                                <h3>铁道工程学院</h3>
+                                <p>学校历史最悠久、最具特色的二级学院。依托铁路行业优势，培养掌握铁路线路、桥梁、隧道施工与维护技术的高素质技术技能人才，毕业生遍布全国各大铁路局和工程局。</p>
+                                <div class="dp-tags"><span>铁道工程技术</span><span>高速铁道工程技术</span><span>铁道桥梁隧道工程技术</span><span>铁路养护与维修</span></div>
+                            </div>
+                        </div>
+                        <div class="dp" id="d2">
+                            <div class="dp-img"><img src="images/training-workshop.jpg" alt="实训工区" loading="lazy"></div>
+                            <div class="dp-body">
+                                <h3>城轨工程学院</h3>
+                                <p>紧跟城市轨道交通发展潮流，专注地铁、轻轨、单轨等基础设施建设与维护人才培养，与全国多家地铁公司建立深度合作关系。</p>
+                                <div class="dp-tags"><span>城市轨道交通工程技术</span><span>城市轨道交通运营管理</span><span>地下与隧道工程技术</span><span>盾构施工技术</span></div>
+                            </div>
+                        </div>
+                        <div class="dp" id="d3">
+                            <div class="dp-img"><img src="images/train-square.jpg" alt="火车头广场" loading="lazy"></div>
+                            <div class="dp-body">
+                                <h3>测绘工程学院</h3>
+                                <p>拥有全国领先的测绘实训条件，涵盖GPS、无人机航测、三维激光扫描等前沿技术。学生在全国测绘技能大赛中常年保持优异成绩。</p>
+                                <div class="dp-tags"><span>工程测量技术</span><span>测绘地理信息技术</span><span>无人机测绘技术</span><span>摄影测量与遥感技术</span></div>
+                            </div>
+                        </div>
+                        <div class="dp" id="d4">
+                            <div class="dp-img"><img src="images/campus-bridge.jpg" alt="陕铁院桥" loading="lazy"></div>
+                            <div class="dp-body">
+                                <h3>道桥与建筑学院</h3>
+                                <p>培养公路、桥梁、建筑等领域的施工与管理人才，注重实践能力培养，与多家大型建筑企业保持密切合作关系。</p>
+                                <div class="dp-tags"><span>道路与桥梁工程技术</span><span>建筑工程技术</span><span>工程造价</span><span>建筑装饰工程技术</span></div>
+                            </div>
+                        </div>
+                        <div class="dp" id="d5">
+                            <div class="dp-img"><img src="images/campus-square.jpg" alt="五育广场" loading="lazy"></div>
+                            <div class="dp-body">
+                                <h3>工程管理与物流学院</h3>
+                                <p>聚焦工程项目管理、物资管理与供应链领域，为铁路和基建行业培养既懂技术又善管理的复合型人才。</p>
+                                <div class="dp-tags"><span>建设工程管理</span><span>工程物流管理</span><span>建设工程监理</span><span>安全技术与管理</span></div>
+                            </div>
+                        </div>
+                        <div class="dp" id="d6">
+                            <div class="dp-img"><img src="images/building-training.jpg" alt="实训楼" loading="lazy"></div>
+                            <div class="dp-body">
+                                <h3>机电工程学院</h3>
+                                <p>以铁路机电设备维护和智能制造为特色，培养掌握机电一体化、铁道供电、焊接等技术的高素质技能人才。</p>
+                                <div class="dp-tags"><span>铁道供电技术</span><span>铁道信号自动控制</span><span>机电一体化技术</span><span>智能焊接技术</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 校园生活 ========== -->
+        <section class="sec sec-life" id="sec-life">
+            <div class="wrap">
+                <div class="sec-hdr">
+                    <span class="sh-num reveal-up">04</span>
+                    <h2 class="sh-ttl reveal-up">校园生活</h2>
+                    <div class="sh-bar reveal-up"></div>
+                </div>
+            </div>
+            <div class="life-grid">
+                <div class="life-card life-big reveal-scale" data-cursor="pointer">
+                    <img src="images/campus-square.jpg" alt="五育广场" loading="lazy">
+                    <div class="life-info"><h3>五育广场</h3><p>德智体美劳全面发展的校园文化中心</p></div>
+                </div>
+                <div class="life-card reveal-scale" style="--d:.08s" data-cursor="pointer">
+                    <img src="images/building-training.jpg" alt="教学实训楼" loading="lazy">
+                    <div class="life-info"><h3>教学实训楼</h3><p>现代化教学与实验设施</p></div>
+                </div>
+                <div class="life-card reveal-scale" style="--d:.12s" data-cursor="pointer">
+                    <img src="images/sports-field.jpg" alt="田径场" loading="lazy">
+                    <div class="life-info"><h3>田径场</h3><p>标准化运动场地</p></div>
+                </div>
+                <div class="life-card reveal-scale" style="--d:.16s" data-cursor="pointer">
+                    <img src="images/training-highspeed.jpg" alt="高铁实训基地" loading="lazy">
+                    <div class="life-info"><h3>高铁实训基地</h3><p>全国领先的铁路实训平台</p></div>
+                </div>
+                <div class="life-card reveal-scale" style="--d:.2s" data-cursor="pointer">
+                    <img src="images/bashan-square.jpg" alt="巴山精神文化广场" loading="lazy">
+                    <div class="life-info"><h3>巴山精神文化广场</h3><p>传承铁路精神的文化育人阵地</p></div>
+                </div>
+                <div class="life-card reveal-scale" style="--d:.24s" data-cursor="pointer">
+                    <img src="images/dormitory.jpg" alt="学生公寓" loading="lazy">
+                    <div class="life-info"><h3>学生公寓</h3><p>温馨舒适的住宿环境</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 就业前景 ========== -->
+        <section class="sec sec-job" id="sec-job">
+            <div class="job-banner">
+                <img src="images/news-activity1.jpg" alt="校园活动" loading="lazy">
+                <div class="job-ban-ov">
+                    <span class="job-ban-sub reveal-up">GRADUATE EMPLOYMENT</span>
+                    <div class="job-ban-big reveal-up"><span class="hs-num" data-to="96">0</span><span>%</span></div>
+                    <p class="job-ban-txt reveal-up">毕业生就业率，连续多年保持高位</p>
+                </div>
+            </div>
+            <div class="wrap">
+                <div class="job-partners">
+                    <h3 class="reveal-up">合作企业</h3>
+                    <div class="jp-grid">
+                        <div class="jp-card reveal-up" style="--d:0s">
+                            <svg class="jp-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="4" y="14" width="28" height="18" rx="2"/><path d="M10 14V9a8 8 0 0116 0v5"/><line x1="18" y1="20" x2="18" y2="28"/></svg>
+                            <h4>中国中铁</h4><span>全球最大基建企业之一</span>
+                        </div>
+                        <div class="jp-card reveal-up" style="--d:.07s">
+                            <svg class="jp-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 26l5-14h18l5 14"/><path d="M8 26h20"/><path d="M13 12l5-4 5 4"/></svg>
+                            <h4>中国铁建</h4><span>世界500强</span>
+                        </div>
+                        <div class="jp-card reveal-up" style="--d:.14s">
+                            <svg class="jp-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="7" width="26" height="22" rx="3"/><circle cx="12" cy="29" r="2.5"/><circle cx="24" cy="29" r="2.5"/><path d="M5 16h26"/></svg>
+                            <h4>各地地铁</h4><span>北上广深及西安等</span>
+                        </div>
+                        <div class="jp-card reveal-up" style="--d:.21s">
+                            <svg class="jp-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 28h28"/><path d="M8 28V13l10-5 10 5v15"/><path d="M15 28v-7h6v7"/></svg>
+                            <h4>铁路局集团</h4><span>全国18个铁路局</span>
+                        </div>
+                        <div class="jp-card reveal-up" style="--d:.28s">
+                            <svg class="jp-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="18" cy="18" r="14"/><path d="M9 18h18M18 9v18"/><circle cx="18" cy="18" r="5"/></svg>
+                            <h4>中国中车</h4><span>全球轨装龙头企业</span>
+                        </div>
+                        <div class="jp-card reveal-up" style="--d:.35s">
+                            <svg class="jp-ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="18" cy="18" r="14"/><path d="M18 4c-5 5-5 23 0 28M18 4c5 5 5 23 0 28M4 18h28"/></svg>
+                            <h4>海外项目</h4><span>"一带一路"铁路建设</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-adv reveal-up">
+                    <h3>就业优势</h3>
+                    <div class="ja-grid">
+                        <div class="ja"><span class="ja-num">01</span><div><strong>央企直招</strong><span>每年百余家企业进校招聘，央企占比超60%</span></div></div>
+                        <div class="ja"><span class="ja-num">02</span><div><strong>订单培养</strong><span>与企业联合开设"订单班"，毕业即就业</span></div></div>
+                        <div class="ja"><span class="ja-num">03</span><div><strong>薪资可观</strong><span>毕业生起薪普遍高于同类院校平均水平</span></div></div>
+                        <div class="ja"><span class="ja-num">04</span><div><strong>前景广阔</strong><span>铁路和城轨行业持续扩张，人才需求旺盛</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 联系我们 ========== -->
+        <section class="sec sec-conn" id="sec-conn">
+            <div class="wrap">
+                <div class="sec-hdr">
+                    <span class="sh-num reveal-up">05</span>
+                    <h2 class="sh-ttl reveal-up">联系我们</h2>
+                    <div class="sh-bar reveal-up"></div>
+                </div>
+                <div class="conn-grid">
+                    <div class="conn-card reveal-up" style="--d:0s">
+                        <svg class="cc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <h4>学校地址</h4><p>陕西省渭南市站北街东段1号</p>
+                    </div>
+                    <div class="conn-card reveal-up" style="--d:.08s">
+                        <svg class="cc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        <h4>招生咨询</h4><p>0913-2221170</p>
+                    </div>
+                    <div class="conn-card reveal-up" style="--d:.16s">
+                        <svg class="cc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <h4>电子邮箱</h4><p>styjwc@163.com</p>
+                    </div>
+                    <div class="conn-card reveal-up" style="--d:.24s">
+                        <svg class="cc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+                        <h4>官方网站</h4><p><a href="https://www.sxri.net" target="_blank" rel="noopener noreferrer" data-cursor="pointer">www.sxri.net</a></p>
+                    </div>
+                </div>
+                <div class="conn-map reveal-scale">
+                    <img src="images/campus-sculpture.jpg" alt="校园景观" loading="lazy">
+                    <div class="cm-badge">
+                        <svg class="cm-pin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <div><strong>陕西省渭南市</strong><span>距西安北站约25分钟高铁车程</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="foot">
+        <div class="wrap">
+            <div class="foot-brand">
+                <span class="fb-zh">陕西铁路工程职业技术学院</span>
+                <span class="fb-en">SHAANXI RAILWAY INSTITUTE</span>
+            </div>
+            <div class="foot-links">
+                <a href="#sec-hero" data-cursor="pointer">首页</a>
+                <a href="#sec-about" data-cursor="pointer">概况</a>
+                <a href="#sec-feat" data-cursor="pointer">特色</a>
+                <a href="#sec-dept" data-cursor="pointer">院系</a>
+                <a href="#sec-life" data-cursor="pointer">校园</a>
+                <a href="#sec-job" data-cursor="pointer">就业</a>
+                <a href="#sec-conn" data-cursor="pointer">联系</a>
+            </div>
+            <div class="foot-copy">
+                <p>本网站为学习演示用途，内容仅供参考 · 官方信息请访问 <a href="https://www.sxri.net" target="_blank" rel="noopener noreferrer">www.sxri.net</a></p>
+                <p>&copy; 2026 陕西铁路工程职业技术学院</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="btt magnetic" id="btt" data-cursor="pointer" aria-label="回到顶部">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.sxri.net)",
+      "WebSearch",
+      "WebFetch(domain:baike.baidu.com)",
+      "WebFetch(domain:www.gaokao.cn)",
+      "Bash(curl -sL --connect-timeout 10 -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://www.sxri.net/635/list.htm\")",
+      "Bash(curl -sL --connect-timeout 10 -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://www.sxri.net/\")",
+      "Bash(curl -sL --connect-timeout 10 -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://www.sxri.net/629/list.htm\")",
+      "Bash(curl -sL --connect-timeout 10 -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" \"https://baike.baidu.com/item/陕西铁路工程职业技术学院\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.sxri.net/2023/1009/c635a74810/page.htm\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.sxri.net/685/list.htm\")",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}
