@@ -1,44 +1,108 @@
+/* ========================================
+   陕铁院 · 高级感官网 — 主脚本
+   模块化结构：配置 → 缓存DOM → 功能模块
+   ======================================== */
+
+// ===== 配置常量 =====
+// 将散落各处的魔法数字集中管理，方便维护调整
+const CONFIG = {
+    preloader: {
+        delay: 700,            // 预加载消失延迟 (ms)
+        typingStart: 1200      // 打字机开始延迟 (ms)
+    },
+    cursor: {
+        easing: 0.13           // 光标跟随缓动系数
+    },
+    scroll: {
+        headerThreshold: 60,   // 导航栏变紧凑的滚动距离 (px)
+        backToTopThreshold: 500 // 回到顶部按钮出现的滚动距离 (px)
+    },
+    typing: {
+        speed: 100             // 打字速度 (ms/字)
+    },
+    particles: {
+        density: 12000,        // 粒子密度因子 (屏幕面积/此值=粒子数)
+        maxCount: 60           // 最大粒子数量
+    },
+    animation: {
+        numberDuration: 2000,  // 数字递增动画时长 (ms)
+        touchThreshold: 60     // 触摸滑动最小距离 (px)
+    },
+    modal: {
+        focusDelay: 100        // 模态焦点恢复延迟 (ms)
+    }
+};
+
+// ===== DOM 元量缓存 =====
+// 缓存常用 DOM 引用，避免重复查询
+const DOM = {
+    preloader: document.getElementById('preloader'),
+    cursor: document.getElementById('cur'),
+    cursorRing: document.getElementById('curRing'),
+    header: document.getElementById('hdr'),
+    backToTop: document.getElementById('btt'),
+    heroImg: document.querySelector('.hero-img'),
+    burger: document.getElementById('burger'),
+    fsMenu: document.getElementById('fsmenu'),
+    majorModal: document.getElementById('majorModal'),
+    lightbox: document.getElementById('lightbox'),
+    heroParticles: document.getElementById('heroParticles'),
+    majorSearch: document.getElementById('majorSearch'),
+    majorSearchClear: document.getElementById('majorSearchClear'),
+    majorSearchResults: document.getElementById('majorSearchResults'),
+    navLinks: document.querySelectorAll('.hn-link'),
+    tabButtons: document.querySelectorAll('.dt'),
+    deptPanels: document.querySelectorAll('.dp'),
+    panelsWrap: document.querySelector('.dept-panels')
+};
+
+// ===== 预加载 =====
 addEventListener('load', () => {
-    const p = document.getElementById('preloader');
-    if (p) {
+    if (DOM.preloader) {
         setTimeout(() => {
-            p.classList.add('out');
+            DOM.preloader.classList.add('out');
             document.querySelectorAll('.hero .reveal-up, .hero .reveal-scale').forEach(e => e.classList.add('go'));
-        }, 700);
+        }, CONFIG.preloader.delay);
     }
 });
 
-// ===== 自定义光标 + rAF 循环（可暂停） =====
-const cur = document.getElementById('cur');
-const ring = document.getElementById('curRing');
-let mx = 0, my = 0, rx = 0, ry = 0, rafId;
+// ===== 自定义光标 + rAF 循环 =====
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, rafId;
 
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
 
 function animFrame() {
     // 使用 transform 代替 left/top，GPU 加速，避免布局重排
-    cur.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-    rx += (mx - rx) * 0.13;
-    ry += (my - ry) * 0.13;
-    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+    DOM.cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    ringX += (mouseX - ringX) * CONFIG.cursor.easing;
+    ringY += (mouseY - ringY) * CONFIG.cursor.easing;
+    DOM.cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
     rafId = requestAnimationFrame(animFrame);
 }
 animFrame();
 
+// 页面不可见时暂停光标动画，节省性能
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) { cancelAnimationFrame(rafId); }
     else { animFrame(); }
 });
 
+// 给可交互元素添加光标悬停效果
 document.querySelectorAll('[data-cursor],a,button,.life-card,.fc,.jp-card,.conn-card,.ac,.dp-tags span,.tl-card').forEach(el => {
-    el.addEventListener('mouseenter', () => { cur.classList.add('h'); ring.classList.add('h'); });
-    el.addEventListener('mouseleave', () => { cur.classList.remove('h'); ring.classList.remove('h'); });
+    el.addEventListener('mouseenter', () => {
+        DOM.cursor.classList.add('h');
+        DOM.cursorRing.classList.add('h');
+    });
+    el.addEventListener('mouseleave', () => {
+        DOM.cursor.classList.remove('h');
+        DOM.cursorRing.classList.remove('h');
+    });
 });
 
 // ===== 导航栏（rAF 节流） =====
-const hdr = document.getElementById('hdr');
-const btt = document.getElementById('btt');
-const heroImg = document.querySelector('.hero-img');
 let scrollTick = false;
 
 addEventListener('scroll', () => {
@@ -46,53 +110,55 @@ addEventListener('scroll', () => {
         scrollTick = true;
         requestAnimationFrame(() => {
             const y = scrollY;
-            if (hdr) hdr.classList.toggle('on', y > 60);
-            if (btt) btt.classList.toggle('vis', y > 500);
-            if (heroImg) heroImg.style.transform = `translateY(${y * 0.32}px)`;
+            if (DOM.header) DOM.header.classList.toggle('on', y > CONFIG.scroll.headerThreshold);
+            if (DOM.backToTop) DOM.backToTop.classList.toggle('vis', y > CONFIG.scroll.backToTopThreshold);
+            if (DOM.heroImg) DOM.heroImg.style.transform = `translateY(${y * 0.32}px)`;
             scrollTick = false;
         });
     }
 }, { passive: true });
 
-if (btt) btt.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+if (DOM.backToTop) {
+    DOM.backToTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+}
 
 // ===== 导航高亮 =====
-const navs = document.querySelectorAll('.hn-link');
 const navObs = new IntersectionObserver(entries => {
     entries.forEach(en => {
         if (en.isIntersecting) {
             const id = en.target.id;
-            navs.forEach(n => n.classList.toggle('active', n.getAttribute('href') === '#' + id));
+            DOM.navLinks.forEach(n => n.classList.toggle('active', n.getAttribute('href') === '#' + id));
         }
     });
 }, { threshold: 0.28, rootMargin: '-60px 0px -40% 0px' });
+
 document.querySelectorAll('section[id]').forEach(s => navObs.observe(s));
 
 // ===== 全屏菜单 =====
-const burger = document.getElementById('burger');
-const fsmenu = document.getElementById('fsmenu');
-
-burger.addEventListener('click', () => {
-    const open = fsmenu.classList.toggle('on');
-    burger.classList.toggle('on', open);
-    burger.setAttribute('aria-expanded', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-});
-
-document.querySelectorAll('.fsmenu-nav a').forEach(a => {
-    a.addEventListener('click', () => {
-        burger.classList.remove('on');
-        burger.setAttribute('aria-expanded', 'false');
-        fsmenu.classList.remove('on');
-        document.body.style.overflow = '';
+if (DOM.burger && DOM.fsMenu) {
+    DOM.burger.addEventListener('click', () => {
+        const open = DOM.fsMenu.classList.toggle('on');
+        DOM.burger.classList.toggle('on', open);
+        DOM.burger.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
     });
-});
 
-// ===== 滚动入场 =====
+    document.querySelectorAll('.fsmenu-nav a').forEach(a => {
+        a.addEventListener('click', () => {
+            DOM.burger.classList.remove('on');
+            DOM.burger.setAttribute('aria-expanded', 'false');
+            DOM.fsMenu.classList.remove('on');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// ===== 滚动入场动画 =====
 const revObs = new IntersectionObserver(entries => {
     entries.forEach(en => {
         if (en.isIntersecting) {
             en.target.classList.add('go');
+            // 触发数字递增动画
             en.target.querySelectorAll('.hs-num').forEach(n => {
                 if (!n.dataset.done) { n.dataset.done = '1'; countNum(n, +n.dataset.to); }
             });
@@ -103,25 +169,24 @@ const revObs = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.sec .reveal-up, .sec .reveal-scale, .job-banner .reveal-up, .hs-item').forEach(el => revObs.observe(el));
 
-// ===== 数字递增 =====
+// ===== 数字递增动画 =====
 function countNum(el, to) {
-    const dur = 2000, t0 = performance.now();
+    const dur = CONFIG.animation.numberDuration;
+    const t0 = performance.now();
     (function tick(now) {
         const p = Math.min((now - t0) / dur, 1);
+        // 指数缓出：先快后慢
         const ease = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
         el.textContent = Math.floor(to * ease).toLocaleString();
         if (p < 1) requestAnimationFrame(tick);
     })(t0);
 }
 
-// ===== 院系标签（支持键盘导航 + ARIA） =====
-const tabs = document.querySelectorAll('.dt');
-const deptPanels = document.querySelectorAll('.dp');
-
+// ===== 院系标签切换（支持键盘导航 + ARIA） =====
 function switchTab(targetTab) {
     const id = targetTab.dataset.tab;
-    // 切换按钮状态
-    tabs.forEach(x => {
+    // 更新按钮状态
+    DOM.tabButtons.forEach(x => {
         x.classList.remove('active');
         x.setAttribute('aria-selected', 'false');
         x.setAttribute('tabindex', '-1');
@@ -130,7 +195,7 @@ function switchTab(targetTab) {
     targetTab.setAttribute('aria-selected', 'true');
     targetTab.setAttribute('tabindex', '0');
     // 切换面板
-    deptPanels.forEach(p => {
+    DOM.deptPanels.forEach(p => {
         p.classList.remove('active');
         p.style.animationName = 'none';
     });
@@ -141,19 +206,19 @@ function switchTab(targetTab) {
     }
 }
 
-tabs.forEach((t, i) => {
+DOM.tabButtons.forEach((t, i) => {
     t.setAttribute('tabindex', i === 0 ? '0' : '-1');
     t.addEventListener('click', () => switchTab(t));
 
-    // 键盘导航：左右箭头切换标签
+    // 键盘导航：左右箭头切换标签（遵循 WAI-ARIA tablist 模式）
     t.addEventListener('keydown', e => {
         let next;
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
-            next = tabs[(i + 1) % tabs.length];
+            next = DOM.tabButtons[(i + 1) % DOM.tabButtons.length];
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
-            next = tabs[(i - 1 + tabs.length) % tabs.length];
+            next = DOM.tabButtons[(i - 1 + DOM.tabButtons.length) % DOM.tabButtons.length];
         }
         if (next) {
             next.focus();
@@ -163,29 +228,26 @@ tabs.forEach((t, i) => {
 });
 
 // ===== 移动端触摸滑动切换院系 =====
-const panelsWrap = document.querySelector('.dept-panels');
-if (panelsWrap) {
+if (DOM.panelsWrap) {
     let touchStartX = 0;
-    let touchEndX = 0;
 
-    panelsWrap.addEventListener('touchstart', e => {
+    DOM.panelsWrap.addEventListener('touchstart', e => {
         touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
-    panelsWrap.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-        const activeIdx = [...tabs].findIndex(t => t.classList.contains('active'));
+    DOM.panelsWrap.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        const activeIdx = [...DOM.tabButtons].findIndex(t => t.classList.contains('active'));
 
-        if (Math.abs(diff) > 60) { // 最小滑动距离
+        if (Math.abs(diff) > CONFIG.animation.touchThreshold) {
             let nextIdx;
             if (diff > 0) { // 左滑 → 下一个
-                nextIdx = (activeIdx + 1) % tabs.length;
+                nextIdx = (activeIdx + 1) % DOM.tabButtons.length;
             } else { // 右滑 → 上一个
-                nextIdx = (activeIdx - 1 + tabs.length) % tabs.length;
+                nextIdx = (activeIdx - 1 + DOM.tabButtons.length) % DOM.tabButtons.length;
             }
-            switchTab(tabs[nextIdx]);
-            tabs[nextIdx].focus();
+            switchTab(DOM.tabButtons[nextIdx]);
+            DOM.tabButtons[nextIdx].focus();
         }
     }, { passive: true });
 }
@@ -201,6 +263,115 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         }
     });
 });
+
+// ===== 专业搜索筛选功能 =====
+// 从 majorData 构建搜索索引，支持实时搜索和键盘导航
+(function initMajorSearch() {
+    if (!DOM.majorSearch) return;
+
+    let activeResultIdx = -1;
+    let filteredResults = [];
+
+    // 实时搜索
+    DOM.majorSearch.addEventListener('input', () => {
+        const query = DOM.majorSearch.value.trim();
+        DOM.majorSearchClear.style.display = query ? '' : 'none';
+
+        if (!query) {
+            hideResults();
+            return;
+        }
+
+        // 在所有专业中搜索匹配
+        filteredResults = Object.keys(majorData).filter(name =>
+            name.includes(query) || majorData[name].dept.includes(query)
+        );
+
+        if (filteredResults.length === 0) {
+            DOM.majorSearchResults.innerHTML = '<div class="ms-no-result">未找到匹配的专业</div>';
+            DOM.majorSearchResults.style.display = '';
+            activeResultIdx = -1;
+            return;
+        }
+
+        // 渲染搜索结果，高亮匹配文字
+        DOM.majorSearchResults.innerHTML = filteredResults.map((name, i) => {
+            const data = majorData[name];
+            const highlighted = name.replace(
+                new RegExp(`(${escapeRegExp(query)})`, 'g'),
+                '<span class="ms-match">$1</span>'
+            );
+            return `<div class="ms-result-item${i === 0 ? ' active' : ''}" role="option" data-name="${name}" data-idx="${i}">
+                ${highlighted}
+                <span class="ms-result-dept">${data.dept}</span>
+            </div>`;
+        }).join('');
+        DOM.majorSearchResults.style.display = '';
+        activeResultIdx = 0;
+
+        // 绑定结果点击事件
+        DOM.majorSearchResults.querySelectorAll('.ms-result-item').forEach(item => {
+            item.addEventListener('click', () => {
+                openMajor(item.dataset.name);
+                clearSearch();
+            });
+        });
+    });
+
+    // 键盘导航搜索结果
+    DOM.majorSearch.addEventListener('keydown', e => {
+        const items = DOM.majorSearchResults.querySelectorAll('.ms-result-item');
+        if (!items.length) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            activeResultIdx = (activeResultIdx + 1) % items.length;
+            updateActiveResult(items);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            activeResultIdx = (activeResultIdx - 1 + items.length) % items.length;
+            updateActiveResult(items);
+        } else if (e.key === 'Enter' && activeResultIdx >= 0) {
+            e.preventDefault();
+            openMajor(filteredResults[activeResultIdx]);
+            clearSearch();
+        } else if (e.key === 'Escape') {
+            clearSearch();
+            DOM.majorSearch.blur();
+        }
+    });
+
+    // 清除按钮
+    DOM.majorSearchClear.addEventListener('click', clearSearch);
+
+    // 点击外部关闭结果
+    document.addEventListener('click', e => {
+        if (!e.target.closest('.major-search')) {
+            hideResults();
+        }
+    });
+
+    function updateActiveResult(items) {
+        items.forEach((item, i) => item.classList.toggle('active', i === activeResultIdx));
+        items[activeResultIdx]?.scrollIntoView({ block: 'nearest' });
+    }
+
+    function hideResults() {
+        DOM.majorSearchResults.style.display = 'none';
+        activeResultIdx = -1;
+    }
+
+    function clearSearch() {
+        DOM.majorSearch.value = '';
+        DOM.majorSearchClear.style.display = 'none';
+        hideResults();
+    }
+
+    // 转义正则特殊字符
+    function escapeRegExp(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+})();
 
 // ===== 专业详情数据 =====
 // 每个专业包含：名称、所属学院、学制、核心课程、就业方向、专业特色、简介
@@ -382,7 +553,7 @@ const majorData = {
 };
 
 // ===== 专业详情模态弹窗 =====
-const modal = document.getElementById('majorModal');
+const modal = DOM.majorModal;
 const modalContent = modal.querySelector('.modal-content');
 const modalClose = modal.querySelector('.modal-close');
 let lastFocusedElement = null; // 记录打开模态前的焦点元素
@@ -459,7 +630,7 @@ function openMajor(name) {
     modalContent.scrollTop = 0;
 
     // 将焦点移到关闭按钮
-    setTimeout(() => modalClose.focus(), 100);
+    setTimeout(() => modalClose.focus(), CONFIG.modal.focusDelay);
 }
 
 // 给所有专业标签绑定点击事件 + 添加 tabindex
@@ -512,13 +683,13 @@ document.querySelectorAll('.magnetic').forEach(btn => {
                 // 打完后2秒隐藏光标
                 setTimeout(() => { if (cursor) cursor.style.opacity = '0'; }, 2000);
             }
-        }, 100); // 每100ms打一个字
-    }, 1200); // 预加载消失后开始
+        }, CONFIG.typing.speed);
+    }, CONFIG.preloader.typingStart);
 })();
 
 // ===== 首页轨道粒子动画 =====
 (function initParticles() {
-    const canvas = document.getElementById('heroParticles');
+    const canvas = DOM.heroParticles;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let w, h, particles = [], animId;
@@ -559,7 +730,7 @@ document.querySelectorAll('.magnetic').forEach(btn => {
     }
 
     // 创建粒子（数量根据屏幕大小调整）
-    const count = Math.min(Math.floor(w * h / 12000), 60);
+    const count = Math.min(Math.floor(w * h / CONFIG.particles.density), CONFIG.particles.maxCount);
     for (let i = 0; i < count; i++) particles.push(new Particle());
 
     // 绘制轨道线（水平细线）
@@ -600,7 +771,7 @@ document.querySelectorAll('.magnetic').forEach(btn => {
 
 // ===== 照片灯箱 =====
 (function initLightbox() {
-    const lb = document.getElementById('lightbox');
+    const lb = DOM.lightbox;
     if (!lb) return;
     const lbImg = lb.querySelector('.lightbox-img');
     const lbCaption = lb.querySelector('.lightbox-caption');

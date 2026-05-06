@@ -11,7 +11,7 @@
     --sf2:#161d33;
     --bd:rgba(255,255,255,.06);
     --tx:#e0ddd5;
-    --tx2:#8a8d9e;
+    --tx2:#a1a4b3; /* WCAG AA: 对比度 ≥4.5:1 on #080c18 */
     --tx3:#555870;
     --go:#c9a96e;
     --go-l:#dfc9a0;
@@ -42,9 +42,11 @@ img{max-width:100%;display:block}
 .skip-link:focus{top:0;outline:none}
 
 /* ===== 焦点可见性（键盘导航） ===== */
-:focus-visible{outline:2px solid var(--go);outline-offset:3px;border-radius:4px}
-.dt:focus-visible{outline:2px solid var(--go);outline-offset:-1px}
-.dp-tags span:focus-visible{outline:2px solid var(--go);outline-offset:1px}
+:focus-visible{outline:2px solid var(--go);outline-offset:3px;border-radius:4px;box-shadow:0 0 0 4px rgba(201,169,110,.15)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--go);outline-offset:3px;box-shadow:0 0 0 4px rgba(201,169,110,.15)}
+.dt:focus-visible{outline:2px solid var(--go);outline-offset:-1px;box-shadow:0 0 0 4px rgba(201,169,110,.12)}
+.dp-tags span:focus-visible{outline:2px solid var(--go);outline-offset:1px;box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.btn-gold:focus-visible{outline:2px solid var(--go);outline-offset:4px;box-shadow:0 0 0 4px rgba(201,169,110,.2)}
 
 /* ===== 纹理叠加 ===== */
 .grain{position:fixed;inset:0;pointer-events:none;z-index:99998;opacity:.035;
@@ -177,6 +179,22 @@ img{max-width:100%;display:block}
 
 /* ===== 院系专业 ===== */
 .sec-dept{background:var(--bg)}
+/* 专业搜索 */
+.major-search{position:relative;max-width:480px;margin:0 auto 32px}
+.ms-input-wrap{position:relative;display:flex;align-items:center}
+.ms-icon{position:absolute;left:16px;width:18px;height:18px;color:var(--tx3);pointer-events:none;transition:color .3s}
+.ms-input{width:100%;padding:12px 40px 12px 44px;background:var(--sf);border:1px solid var(--bd);border-radius:50px;color:var(--tx);font-size:.84rem;font-family:var(--ff);transition:border-color .3s,box-shadow .3s}
+.ms-input::placeholder{color:var(--tx3)}
+.ms-input:focus{outline:none;border-color:var(--go-a25);box-shadow:0 0 0 3px rgba(201,169,110,.1)}
+.ms-input:focus~.ms-icon{color:var(--go)}
+.ms-clear{position:absolute;right:12px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--tx3);border-radius:50%;transition:color .3s,background .3s}
+.ms-clear:hover{color:var(--tx);background:rgba(255,255,255,.05)}
+.ms-results{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);max-height:280px;overflow-y:auto;z-index:100;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.ms-result-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;transition:background .2s;font-size:.82rem;color:var(--tx)}
+.ms-result-item:hover,.ms-result-item.active{background:rgba(201,169,110,.08);color:var(--go)}
+.ms-result-dept{font-size:.68rem;color:var(--tx3);margin-left:auto;white-space:nowrap}
+.ms-result-item .ms-match{color:var(--go);font-weight:600}
+.ms-no-result{padding:16px;text-align:center;font-size:.82rem;color:var(--tx3)}
 .dept-wrap{display:grid;grid-template-columns:220px 1fr;gap:36px;min-height:380px}
 .dept-tabs{display:flex;flex-direction:column;gap:3px;position:relative}
 .dept-tabs::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--go-a12),transparent 30%,transparent 70%,var(--go-a12));border-radius:1px}
@@ -425,4 +443,64 @@ img{max-width:100%;display:block}
     .dp-tags span::after{display:none}
     .typing-cursor{animation:none}
     .lightbox-img{animation:none}
+}
+
+/* ===== 打印样式 ===== */
+@media print{
+    /* 隐藏非打印元素 */
+    .preloader,.grain,.cur,.cur-ring,.hdr-burger,.fsmenu,.hero-scroll,.btt,
+    .hero-particles,.modal,.lightbox,.typing-cursor,.major-search,
+    .btn-gold,.magnetic{display:none !important}
+
+    /* 基础样式重置 */
+    body{background:#fff !important;color:#222 !important;cursor:auto !important;font-size:11pt}
+    *{cursor:auto !important;animation:none !important;transition:none !important}
+    a{color:#222 !important;text-decoration:underline}
+    a::after{content:" (" attr(href) ")";font-size:.8em;color:#666}
+
+    /* 导航改为简单标题 */
+    .hdr{position:relative !important;padding:10px 0 !important;background:none !important;border-bottom:2px solid #c9a96e !important}
+    .hdr-nav{display:none !important}
+
+    /* 首页大图简化 */
+    .hero{height:auto !important;min-height:0 !important;padding:40px 20px}
+    .hero-media{display:none}
+    .hero-body{max-width:100% !important;padding:0 !important}
+    .hero-stats{position:relative !important;background:none !important;border:1px solid #ddd !important;backdrop-filter:none !important;flex-wrap:wrap}
+    .hs-lab{color:#666 !important}
+    .hs-num{color:#c9a96e !important}
+
+    /* 板块样式 */
+    .sec{padding:30px 0 !important;content-visibility:visible !important;break-inside:avoid}
+    .sec::before{display:none !important}
+    .sh-num,.sh-bar{color:#999 !important}
+    .sh-ttl{color:#222 !important}
+
+    /* 卡片去背景 */
+    .fc,.jp-card,.conn-card,.ac,.adm-card,.ja{background:#f8f8f8 !important;border:1px solid #ddd !important;box-shadow:none !important}
+    .fc h3,.jp-card h4,.conn-card h4,.ac strong,.adm-card h3,.ja strong{color:#222 !important}
+    .fc p,.jp-card span,.conn-card p,.ac span,.adm-card p,.ja>div span{color:#555 !important}
+
+    /* 院系面板 */
+    .dept-wrap{display:block !important}
+    .dp{display:block !important;margin-bottom:20px;page-break-inside:avoid}
+    .dp.active{display:block !important}
+    .dp-img{max-width:300px;margin-bottom:10px}
+
+    /* 校园生活网格 */
+    .life-grid{display:block !important}
+    .life-card{display:inline-block;width:45%;margin:1%;vertical-align:top;page-break-inside:avoid}
+    .life-big{width:90% !important}
+
+    /* 时间轴 */
+    .timeline-line{display:none}
+    .tl-item,.tl-item.tl-right{flex-direction:row !important;display:block !important;margin-bottom:15px}
+    .tl-card{width:100% !important;margin:0 !important;border:1px solid #ddd !important;background:#f8f8f8 !important}
+    .tl-dot{display:none}
+    .tl-year{color:#c9a96e !important}
+
+    /* 页脚 */
+    .foot{border-top:2px solid #ddd !important;padding:20px 0}
+    .foot-brand::before,.foot-brand::after{display:none}
+    .foot-links{flex-wrap:wrap}
 }
